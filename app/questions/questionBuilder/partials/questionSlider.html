@@ -1,0 +1,13 @@
+<div class="slides group-{{group}} questionSlides">
+  <div class="questionSet">
+    <a ng-click="prev()" class="nav prev"><</a>
+      <div ng-repeat="slide in slides">
+        <div ng-show="isCurrent($index)" class="slide slide-animation">
+        <div ng-repeat="item in slide" class="image" ng-click="quest({itm:item}); selectItem(item)" ng-class="{sel: item == selected}">
+            <img ng-src="/app/questions/questionBuilder/{{item.image}}" alt="{{ item.description }}"/>
+          </div>
+        </div>
+      </div>
+    <a ng-click="next()" class="nav next">></a>
+  </div>
+</div>

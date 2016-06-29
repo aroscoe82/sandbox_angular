@@ -1,0 +1,38 @@
+{
+  "name": "sandbox_angular",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -a localhost -p 8090 -o"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bower": "^1.7.6",
+    "grunt": "^0.4.5",
+    "grunt-autoprefixer": "^3.0.4",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-html2js": "^0.3.4",
+    "grunt-hub": "^0.7.0",
+    "grunt-karma": "^0.12.2",
+    "grunt-ng-annotate": "^1.0.1",
+    "grunt-ng-constant": "^2.0.1",
+    "grunt-preprocess": "^5.1.0",
+    "http-server": "^0.9.0",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-cli": "^0.1.2",
+    "karma-jasmine": "^0.3.8",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "load-grunt-plugins-from-parent": "0.0.3",
+    "phantomjs-prebuilt": "^2.1.7"
+  }
+}

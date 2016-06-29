@@ -1,0 +1,306 @@
+ .btn { border: 1px solid #eee; padding: 10px; display: inline-block; cursor: pointer; }
+  .btn-primary { background-color: #df252a; }
+  .btn-success { background-color: #61b850; }
+
+  .thumbnails { list-style: none; width: 744px; margin: 0 auto; padding-left: 0; }
+  .thumbnails li {
+    /*height: 56px;*/
+    /*width: 60px;*/
+    line-height: 20px;
+    border: 1px solid #ddd;
+    padding: 3px;
+    /*margin-left: 10px;
+    margin-bottom: 10px;*/
+
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+  }
+
+/* Animate */
+.animate-enter, 
+.animate-leave
+{ 
+    -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    position: relative;
+    display: block;
+
+    height: 0;
+} 
+ 
+.animate-enter.animate-enter-active, 
+.animate-leave,
+.animate.ng-enter-active,
+.animate.ng-leave {
+    opacity: 1;
+    top: 0;
+    
+    height: 60px;
+}
+ 
+.animate-leave.animate-leave-active,
+.animate-enter,
+.animate.ng-leave-active,
+.animate.ng-enter {
+    opacity: 0;
+    top: -60px;
+
+    height: 0px;
+}
+
+
+  /*.ng-enter {
+    -webkit-transition: 1s;
+    transition: 1s;
+    height: 0;
+  }
+
+  .ng-enter-active {
+    height: 60px;
+  }
+
+  .ng-leave {
+    -webkit-transition: 1s;
+    transition: 1s;
+   height: 60px;
+  }
+
+  .ng-leave-active {
+   height: 0;
+  }*/
+
+  .thumbnail { 
+    /*height: 50px;*/
+    /*width: 50px;*/
+    text-align: center;
+    padding-top: 0px;
+    transition: none;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    cursor: pointer;
+    background: rgb(182, 173, 123); 
+
+    display: block;
+    padding: 4px;
+    line-height: 20px;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.055);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.055);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.055);
+    /*-webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;*/
+  }
+  .thumbnail h1 { 
+    font-size: 24px;
+    line-height: 40px;
+    margin: 10px 0;
+    font-family: inherit;
+    font-weight: bold;
+    line-height: 1;
+    color: inherit;
+    text-rendering: optimizelegibility; }
+
+    /* Vertical Sortable */
+      .vthumbnail[jqyoui-droppable] { border: 1px solid red; }
+      .vthumbnail {
+        /*height: 50px;*/
+        /*width: 50px;*/
+        text-align: center;
+        padding-top: 0px;
+        cursor: pointer;
+        background: rgb(182, 173, 123);
+        position: relative;
+        -webkit-transition: none;
+        transition: none;
+        float: none !important;
+      }
+      .vthumbnail.ng-leave {
+        -webkit-transition-duration: 0s;
+        transition-duration: 0s;
+        opacity: 1;
+      }
+      .vthumbnail.ng-leave.ng-leave-active {
+        opacity: 0;
+      }
+      .vthumbnail.ng-enter {
+        -webkit-transition: top 0.3s;
+        transition: top 0.3s;
+      }
+      .vthumbnail.ng-enter[data-direction="left"] {
+        top: -76px; /* 56px width + 20px marginBottom */
+      }
+      .vthumbnail.ng-enter[data-direction="right"] {
+        top: 76px; /* 56px width + 20px marginBottom */
+      }
+      .vthumbnail.ng-enter.ng-enter-active {
+        top: 0px;
+      }
+      .questionBuilder { 
+        width: 700px; 
+        margin: 0px auto; 
+        /*border: 1px solid #eee; */
+      }
+
+      .container-questions {
+        width: 744px;
+        height: 58px;
+        margin: 5px auto 0;
+        overflow-y: hidden;
+        overflow-x: scroll;
+
+        border: 1px solid #eee;
+      }
+
+      /*.questionSet {
+        width: 100%;
+        height: 42px;
+        white-space:nowrap;
+      }*/
+
+      .questionSet .image{
+        display: inline-block;
+        margin: 0 2px;
+        border: 1px solid #fff;
+        height: 42px;
+        width: 127px;
+      }
+
+.slide.sel, .image.sel { 
+  /*border: 1px solid red; */
+  background-color: #eee;
+}
+
+/* Slider */
+.slides, .questionSlides {
+  width: 700px;
+  height: 50px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #aeaeae;
+}
+.questionSet { padding: 2px 0; }
+.slide {
+  width: 655px;
+  height: 42px;
+  margin: 0 auto;
+  /*position: absolute;*/
+}
+
+.slide .image {
+  display: inline-block;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+}
+
+.controls {
+  color: #fff;
+  clear: both;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+a.nav {
+  line-height: 50px;
+  position: absolute;
+  /*top: 50%;*/
+  top: 0;
+  margin-top: -0.5em;
+  display: inline-block;
+  padding: 0.5em;
+  background-color: #c6c6c6;
+  color: #FFF;
+  cursor: pointer;
+}
+
+a.nav:hover{
+  text-decoration: none;
+  background-color: #aeaeae;
+  color: #fff;
+}
+
+a.nav.prev {
+  left: 0;
+}
+
+a.nav.next {
+  right: 0;
+}
+/* Supporting marketing content */
+.marketing {
+  margin: 60px 0;
+}
+.marketing p, .marketing h4 {
+  margin-top: 28px;
+}
+
+.add-field {
+  text-align: center;
+}
+
+.add-field select {
+  margin-bottom: 0px;
+}
+
+.form-fields .accordion-group{
+  border: 1px solid #AAAAAA;
+}
+
+.form-fields .accordion-heading{
+  background-color: #E2E2E2;
+}
+
+.accordion-edit div, .field div{
+  line-height: 35px;
+}
+
+.form-properties .row {
+  line-height: 35px;
+}
+
+.form-field-label {
+  display: inline;
+}
+
+.required-error {
+  color:red;
+  font-size: smaller;
+}
+
+.panel-default>.panel-heading {
+  cursor: move;
+}
+
+.q-over {
+  /* applied to a drop target when a draggable object is over it */
+  border: 2px dashed black !important;
+}
+
+.question-block {
+  border: 2px solid #0ea5c6;
+  padding: 1em;
+  background-color: rgba(255,255,255, .9);
+}
+
+.question-block + .question-block {
+  margin-top: 1em;
+}
+
+.drop-zone { border: 2px solid red; padding: 1em; }
