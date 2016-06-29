@@ -31,7 +31,6 @@ angular
 
       $scope.$watch('group', init);
 
-
       $scope.setCurrent = function (index) {
         $scope.direction = (index > $scope.currentIndex) ? 'left' : 'right';
         $scope.currentIndex = index;
@@ -70,6 +69,11 @@ angular
     templateUrl: '/../app/questions/questionBuilder/partials/form.html',
     scope: {
       group: '=group'
+    },
+    controller: function ($scope) {
+      $scope.sortableOptions = {
+        placeholder: 'ui-state-highlight'
+      };
     }
   }
   // return {
@@ -110,7 +114,7 @@ angular
     // 'nps',
     // 'drag_drop_ranking',
     // 'ranking_grid'
-    ]
+    ];
 
     if (__indexOf.call(supported_questions, type) >= 0) {
       return templateUrl += type + '.html';

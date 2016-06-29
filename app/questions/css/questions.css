@@ -304,3 +304,10 @@ a.nav.next {
 }
 
 .drop-zone { border: 2px solid red; padding: 1em; }
+.drop-zone + .drop-zone { margin-top: 1em; }
+ul.unstyled { list-style: none; padding-left: 0; }
+
+#sortable { list-style-type: none; margin: 0; padding: 0; }
+/*#sortable li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; height: 1.5em; }*/
+/*html>body #sortable li { height: 1.5em; line-height: 1.2em; }*/
+.ui-state-highlight { height: 3em; line-height: 1.2em; background-color:#0c7bc6; margin: 1em 0;}

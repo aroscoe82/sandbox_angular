@@ -6,7 +6,7 @@ var __indexOf = [].indexOf || function(item) {
 };
 
 angular
-.module('questionsApp.questionBuilder', ['ui.router', 'ngDragDrop'])
+.module('questionsApp.questionBuilder', ['ui.router', 'ui.sortable'])
 .config(function($stateProvider, $urlRouterProvider){
 
   $stateProvider
@@ -19,8 +19,10 @@ angular
   $urlRouterProvider.otherwise('/');
 })
 .controller('questionBuilderController',[ '$scope', 'QuestionService', function($scope, QuestionService){
-
-  $scope.msg = "Testing Controller";
+  
+  $scope.sortableOptions = {
+    placeholder: 'ui-state-highlight'
+  };
 
   $scope.questionTypes = QuestionService.fields;
 
@@ -50,8 +52,8 @@ angular
     $scope.group.group_questions.push(newField);
   };
 
-  $scope.startCallback = function() {
-    console.log('something');
+  this.dropCallback = function(event, ui, title, $index) {
+    console.log("dropped");
   };
 
   // $scope.deleteQuestion = function(){
@@ -81,16 +83,16 @@ angular
   //       question.question_options.push(newOption);
   //   }
 
-  //   // decides whether field options block will be shown (true for dropdown and radio fields)
-  //   $scope.showAddOptions = function (type){
-  //       if(type == "radio" || type == "dropdown"){
-  //         console.log('failure');
-  //           return true;
-  //       }
-  //       else{
-  //         console.log('failure');
-  //           return false;
-  //       }
-  //   }
+    // decides whether field options block will be shown (true for dropdown and radio fields)
+    $scope.showAddOptions = function (type){
+        if(type == "radio" || type == "dropdown"){
+          console.log('failure');
+            return true;
+        }
+        else{
+          console.log('failure');
+            return false;
+        }
+    };
 
 }]);
