@@ -1,11 +1,11 @@
-<div class="field row">
-    <div class="col-sm-2">{{field.field_title}}:</div>
+<div class="question row">
+    <div class="col-sm-2">{{question.question_title}}:</div>
     <div class="col-sm-4">
     <input type="text" 
-      ng-model="field.field_value" 
-      value="{{field.field_value}}" 
-      ng-required="field.field_required"
-      ng-disabled="field.field_disabled">
-        <span class="required-error" ng-show="field.field_required && !field.field_value">* required</span>
+      ng-model="question.question_value" 
+      value="{{question.question_value}}" 
+      ng-required="question.question_required"
+      ng-disabled="question.question_disabled">
+        <span class="required-error" ng-show="question.question_required && !question.question_value">* required</span>
     </div>
 </div>

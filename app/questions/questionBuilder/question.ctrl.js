@@ -83,16 +83,4 @@ angular
   //       question.question_options.push(newOption);
   //   }
 
-    // decides whether field options block will be shown (true for dropdown and radio fields)
-    $scope.showAddOptions = function (type){
-        if(type == "radio" || type == "dropdown"){
-          console.log('failure');
-            return true;
-        }
-        else{
-          console.log('failure');
-            return false;
-        }
-    };
-
 }]);

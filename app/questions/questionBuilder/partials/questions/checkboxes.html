@@ -1,3 +1,7 @@
-<div class="field row">
-    <div class="col-sm-2">{{field.field_title}}:</div>
+<div class="question row">
+  <div class="col-xs-12">
+  <input ng-model="question.question_value" id="{{question.question_id}}" type="checkbox" ng-true-value="1" ng-false-value="0" ng-required="question.question_required" ng-disabled="question.question_disabled"/>
+    <label class="question-label" for="{{question.question_id}}" ng-cloak>{{question.question_title}}</label>
+    <span class="required-error" ng-show="question.question_required && question.question_value == 0">(* required)</span>
+  </div>
 </div>

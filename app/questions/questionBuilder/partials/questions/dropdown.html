@@ -1,14 +1,14 @@
-<div class="field row">
-    <div class="col-sm-2">{{field.field_title}}:</div>
+<div class="questionrow">
+    <div class="col-sm-2">{{question.question_title}}:</div>
     <div class="col-sm-4">
-    <select ng-model="field.field_value" ng-required="field.field_required" ng-disabled="field.field_disabled">
-      <option ng-repeat="option in field.field_options" 
-          ng-selected="option.option_value == field.field_value"
+    <select ng-model="question.question_value" ng-required="field.field_required" ng-disabled="question.question_disabled">
+      <option ng-repeat="option in question.question_options" 
+          ng-selected="option.option_value == question.question_value"
           value="{{option.option_id}}">
         {{option.option_title}}
       </option>
         </select>    
-        <span class="required-error" ng-show="field.field_required && !field.field_value">* required</span>
+        <span class="required-error" ng-show="question.question_required && !question.question_value">* required</span>
     </div>
 </div>
 <br>
