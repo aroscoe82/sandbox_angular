@@ -1,4 +1,5 @@
-<div class="question row">
+<div class="question container-fluid">
+  <div class="row">
     <div class="col-sm-2">{{question.question_title}}:</div>
     <div class="col-sm-4">
     <input type="text" 
@@ -8,4 +9,5 @@
       ng-disabled="question.question_disabled">
         <span class="required-error" ng-show="question.question_required && !question.question_value">* required</span>
     </div>
+</div>
 </div>

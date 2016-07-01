@@ -1,14 +1,22 @@
 angular
 .module('questionsApp.questionBuilder')
-.directive('slider', function () {
+.directive('addNewQuestion', function($compile){
+  return function(scope, element, attrs){
+    element.bind("click", function(){
+      scope.count++;
+      angular.element(document.getElementById('newQuestion')).append($compile("<div question-builder></div>")(scope));
+    });
+  };
+})
+.directive('questionSlider', function (QuestionService) {
   return {
     restrict: 'EA',
     scope: {
       images: '=images',
       group: '=group',
-      quest: '&',
+      buildquestion: '&'
     },
-    controller: function ($scope) {
+    controller: function ($scope, QuestionService) {
       $scope.group = $scope.group || 1;
       $scope.currentIndex = 0;
       $scope.direction = 'left';
@@ -66,14 +74,14 @@ angular
 .directive('questionBuilder', function () {
   return {
     restrict: 'A',
-    templateUrl: '/../app/questions/questionBuilder/partials/form.html',
-    scope: {
-      group: '=group'
-    },
+    templateUrl: '/../app/questions/questionBuilder/partials/questionBuilder.html',
+    // scope: {
+    //   newQuestion: '=newQuestion'
+    // },
     controller: function ($scope) {
-      $scope.sortableOptions = {
-        placeholder: 'ui-state-highlight'
-      };
+      // $scope.sortableOptions = {
+      //   placeholder: 'ui-state-highlight'
+      // };
 
       // add new option to the field
       $scope.addOption = function (question){
@@ -126,28 +134,6 @@ angular
           return false;
         }
       };
-
-      // // preview form
-      // $scope.previewOn = function(){
-      //   if($scope.question.form_fields == null || $scope.form.form_fields.length == 0) {
-      //     var title = 'Error';
-      //     var msg = 'No fields added yet, please add fields to the form before preview.';
-      //     var btns = [{result:'ok', label: 'OK', cssClass: 'btn-primary'}];
-
-      //     $dialog.messageBox(title, msg, btns).open();
-      //   }
-      //   else {
-      //     $scope.previewMode = !$scope.previewMode;
-      //     $scope.form.submitted = false;
-      //     angular.copy($scope.form, $scope.previewForm);
-      //   }
-      // };
-
-      // // hide preview form, go back to create mode
-      // $scope.previewOff = function(){
-      //   $scope.previewMode = !$scope.previewMode;
-      //   $scope.form.submitted = false;
-      // };
     }
   }
   // return {
@@ -168,7 +154,7 @@ angular
   //         }
   //       };
       })
-.directive('fieldDirective', function($http, $compile) {
+.directive('questionDirective', function($http, $compile) {
 
   var getTemplateUrl = function(field) {
     var type = field.question_type;

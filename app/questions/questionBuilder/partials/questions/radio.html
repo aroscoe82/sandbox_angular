@@ -1,13 +1,15 @@
-<div class="question row">
+<div class="question container-fluid">
+  <div class="row">
     <div class="col-sm-2">{{question.question_title}}:</div>
     <div class="col-sm-4">
-        <div ng-repeat="option in question.question_options" class="row-fluid">
-            <label>
-                <input type="radio" value="{{option.option_value}}" ng-model="question.question_value"  ng-required="question.question_required" ng-disabled="question.question_disabled"/>
-                &nbsp;<span ng-bind="option.option_title"></span>
-            </label>
-        </div>
-        <span class="required-error" ng-show="question.question_required && !question.question_value">* required</span>
+      <div ng-repeat="option in question.question_options" class="row-fluid">
+        <label>
+          <input type="radio" value="{{option.option_value}}" ng-model="question.question_value"  ng-required="question.question_required" ng-disabled="question.question_disabled"/>
+          &nbsp;<span ng-bind="option.option_title"></span>
+        </label>
+      </div>
+      <span class="required-error" ng-show="question.question_required && !question.question_value">* required</span>
     </div>
+  </div>
 </div>
 <br>

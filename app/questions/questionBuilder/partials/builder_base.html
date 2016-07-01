@@ -1,19 +1,21 @@
-  <div slider images="questionTypes" group="5" quest="addQuestion(itm)"></div>
-  <div question-builder group="group"></div>
+  <h2>{{ group.group_name }}</h2>
+  <div ng-show="!group.saved">
+    <div class="field row">
+      <div class="col-sm-2">question Group ID:</div>
+      <div class="col-sm-4">{{ group.group_id }}</div>
+    </div>
+  </div>
+  <!-- <button add-new-question class="btn btn-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Question</button> -->
+  <button ng-click="addNewQuestion()" class="btn btn-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Question</button>
+
+  <ul ng-model="group" class="list-unstyled" >
+    <li ng-repeat="question in group.group_questions | orderBy:group.group_questions.question_id:reverse" class="question-container">
+      <div question-directive question="question"></div>
+
+    </li>
+  </ul>
+
   <hr>
+
   <h4>Question Group Data</h4>
   {{group}}
-
-  <!-- <h2>Sort</h2>
-  <div class="contentWrapper ng-cloak">
-    <div class="content">
-      <div class="row-fluid">
-        <ul class="thumbnails">
-          <li class="thumbnail vthumbnail" 
-          ng-repeat="item in list1" data-drop="true" data-drag="true" ng-model="list1" jqyoui-droppable="{index: {{$index}}}" jqyoui-draggable="{index: {{$index}}, insertInline: true, direction:'jqyouiDirection'}" data-jqyoui-options="{revert: 'invalid'}" data-direction="{{item.jqyouiDirection}}">
-            <h1>{{item.title}}</h1>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div> -->
