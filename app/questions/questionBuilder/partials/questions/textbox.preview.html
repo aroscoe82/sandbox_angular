@@ -1,18 +1,23 @@
 <div class="question container-fluid">
   <div class="row">
-    <div class="col-sm-2">{{question.question_title}}:</div>
-    <div class="col-sm-4">
-    <input type="text" 
-      ng-model="question.question_value" 
-      value="{{question.question_value}}" 
-      ng-required="question.question_required"
-      ng-disabled="question.question_disabled">
-        <span class="required-error" ng-show="question.question_required && !question.question_value">* required</span>
+    <div class="col-sm-10">
+      <div class="row">
+        <div class="col-sm-2">{{question.question_title}}:</div>
+        <div class="col-sm-4">
+        <input type="text" 
+          ng-model="question.question_value" 
+          value="{{question.question_value}}" 
+          ng-required="question.question_required"
+          ng-disabled="question.question_disabled">
+            <span class="required-error" ng-show="question.question_required && !question.question_value">* required</span>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <button ng-click="change(question.question_type, 'edit')" class="btn btn-link"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button><br>
+    <div class="col-sm-2 question-options">
+      <ul class="list-unstyled">
+        <li><div ng-click="change(question.question_type, 'edit')" class="btn btn-link"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</div></li>
+        <li><div class="myHandle btn btn-link"><i class="fa fa-arrows" aria-hidden="true"></i> Move</div></li>
+      </ul>
     </div>
   </div>
 </div>

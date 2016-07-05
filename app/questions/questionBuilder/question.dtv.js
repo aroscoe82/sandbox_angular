@@ -99,6 +99,7 @@ angular
     // },
     controller: function ($scope) {
       // $scope.sortableOptions = {
+      //   handle: '> .myHandle',
       //   placeholder: 'ui-state-highlight'
       // };
 

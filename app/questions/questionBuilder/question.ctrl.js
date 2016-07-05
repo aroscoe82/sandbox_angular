@@ -21,7 +21,11 @@ angular
 .controller('questionGroupController',[ '$scope', 'QuestionService', function($scope, QuestionService){
 
   $scope.sortableOptions = {
-    placeholder: 'ui-state-highlight'
+    handle: '.myHandle',
+    placeholder: 'ui-state-highlight',
+    forcePlaceholderSize: true,
+    opacity: 0.95,
+    sort: function(event, ui) { ui.helper.addClass('ui-state-moveing'); }
   };
 
   // new form
