@@ -9,5 +9,10 @@
       ng-disabled="question.question_disabled">
         <span class="required-error" ng-show="question.question_required && !question.question_value">* required</span>
     </div>
-</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <button ng-click="change(question.question_type, 'edit')" class="btn btn-link"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button><br>
+    </div>
+  </div>
 </div>

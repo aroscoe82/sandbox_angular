@@ -19,6 +19,11 @@ angular
   $urlRouterProvider.otherwise('/');
 })
 .controller('questionGroupController',[ '$scope', 'QuestionService', function($scope, QuestionService){
+
+  $scope.sortableOptions = {
+    placeholder: 'ui-state-highlight'
+  };
+
   // new form
   $scope.group = {};
   $scope.group.group_id = 1;
@@ -28,7 +33,7 @@ angular
   
   $scope.questionTypes = QuestionService.fields;
 
-  $scope.addNewQuestion = function(){
+  $scope.addNewQuestion = function(location, position){
     $scope.questionlastAddedID++;
     var defaultQuestion = {
       "question_id" : $scope.questionlastAddedID,
@@ -36,9 +41,21 @@ angular
       "question_type" : $scope.questionTypes[0].name,
       "question_value" : "",
       "question_required" : true,
-      "question_disabled" : false
+      "question_disabled" : false,
+      "question_view" : 'preview',
     };
-    $scope.group.group_questions.push(defaultQuestion);
+
+    switch(location){
+      case 'top':
+        $scope.group.group_questions.splice(0, 0, defaultQuestion)
+        break;
+      case 'mid':
+        $scope.group.group_questions.splice(position, 0, defaultQuestion)
+        break;
+      default:
+        $scope.group.group_questions.push(defaultQuestion);
+        break;
+    };
   };
 
 }]);

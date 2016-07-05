@@ -8,6 +8,25 @@ angular
     });
   };
 })
+.directive('dynamicTemplate', function(){
+  return {
+    restrict: 'A',
+    replace: true,
+    scope: {
+      question: '=question'
+    },
+    template: '<div><div ng-include="var"></div></div>',
+    controller: function($scope){
+      var path = 'app/questions/questionBuilder/partials/questions/';
+      // $scope.var = path + 'template1.html';
+      $scope.var = path + $scope.question.question_type + '.' + $scope.question.question_view + '.html';
+      $scope.change = function(where, view){
+        $scope.question.question_view = view;
+        $scope.var = path + where + '.' + view + '.html';
+      };
+    }
+  };
+})
 .directive('questionSlider', function (QuestionService) {
   return {
     restrict: 'EA',
@@ -177,7 +196,7 @@ angular
     ];
 
     if (__indexOf.call(supported_questions, type) >= 0) {
-      return templateUrl += type + '.html';
+      return templateUrl += type + '.preview.html';
     }
   }
 
