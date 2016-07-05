@@ -24,6 +24,11 @@ angular
         $scope.question.question_view = view;
         $scope.var = path + where + '.' + view + '.html';
       };
+      $scope.save = function(question){
+        console.log("save question");
+        $scope.question.question_view = 'preview';
+        $scope.var = path + question.question_type + '.' + 'preview' + '.html';
+      }
     }
   };
 })
