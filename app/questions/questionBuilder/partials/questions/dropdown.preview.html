@@ -1,14 +1,30 @@
-<div class="questionrow">
-    <div class="col-sm-2">{{question.question_title}}:</div>
-    <div class="col-sm-4">
-    <select ng-model="question.question_value" ng-required="field.field_required" ng-disabled="question.question_disabled">
-      <option ng-repeat="option in question.question_options" 
-          ng-selected="option.option_value == question.question_value"
-          value="{{option.option_id}}">
-        {{option.option_title}}
-      </option>
-        </select>    
-        <span class="required-error" ng-show="question.question_required && !question.question_value">* required</span>
+<div class="question container-fluid">
+  <div class="row">
+    <div class="col-sm-10">
+      <div class="row">
+        <div class="col-sm-12">
+          {{ question.question_id}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">{{question.question_title}}:</div>
+        <div class="col-sm-4">
+          <select ng-model="question.question_value" ng-required="field.field_required" ng-disabled="question.question_disabled">
+            <option ng-repeat="option in question.question_options" 
+            ng-selected="option.option_value == question.question_value"
+            value="{{option.option_id}}">
+            {{option.option_title}}
+            </option>
+          </select>    
+          <span class="required-error" ng-show="question.question_required && !question.question_value">* required</span>
+        </div>
+      </div>
     </div>
+    <div class="col-sm-2 question-options">
+      <ul class="list-unstyled">
+        <li><div ng-click="change(question.question_type, 'edit')" class="btn btn-link"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</div></li>
+        <li><div class="myHandle btn btn-link"><i class="fa fa-arrows" aria-hidden="true"></i> Move</div></li>
+      </ul>
+    </div>
+  </div>
 </div>
-<br>

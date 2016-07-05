@@ -20,6 +20,7 @@ angular
       var path = 'app/questions/questionBuilder/partials/questions/';
       // $scope.var = path + 'template1.html';
       $scope.var = path + $scope.question.question_type + '.' + $scope.question.question_view + '.html';
+
       $scope.change = function(where, view){
         $scope.question.question_view = view;
         $scope.var = path + where + '.' + view + '.html';
@@ -28,7 +29,7 @@ angular
         console.log("save question");
         $scope.question.question_view = 'preview';
         $scope.var = path + question.question_type + '.' + 'preview' + '.html';
-      }
+      };
     }
   };
 })

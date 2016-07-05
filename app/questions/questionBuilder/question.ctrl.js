@@ -38,6 +38,8 @@ angular
   $scope.questionTypes = QuestionService.fields;
 
   $scope.addNewQuestion = function(location, position){
+    // console.log("addNewQuestion clicked");
+    // alert("not working yet");
     $scope.questionlastAddedID++;
     var defaultQuestion = {
       "question_id" : $scope.questionlastAddedID,
@@ -60,6 +62,31 @@ angular
         $scope.group.group_questions.push(defaultQuestion);
         break;
     };
+  };
+
+    // create new question button click
+  $scope.buildQuestion = function(item){
+    var newField = {
+      "question_id" : $scope.questionlastAddedID,
+      "question_title" : "Question Text",
+      "question_type" : item.name,
+      "question_value" : "",
+      "question_required" : true,
+      "question_disabled" : false,
+      "question_view": 'edit'
+    };
+
+    $scope.newQuestion = newField;
+  };
+
+  $scope.saveNewQuestion = function(item){
+    $scope.questionlastAddedID++;
+    item.question_id = $scope.questionlastAddedID;
+    item.question_view = 'preview';
+    $scope.group.group_questions.push(item);
+
+    $scope.newQuestion = '';
+    $scope.showQuestionBuilder = false;
   };
 
 }]);
