@@ -3,6 +3,7 @@ angular
 .directive('addNewQuestion', function($compile){
   return function(scope, element, attrs){
     element.bind("click", function(){
+      // console.log("addNewQuestion");
       scope.count++;
       angular.element(document.getElementById('newQuestion')).append($compile("<div question-builder></div>")(scope));
     });
@@ -33,7 +34,7 @@ angular
     }
   };
 })
-.directive('questionSlider', function (QuestionService) {
+.directive('questionSlider', function (QuestionService, $compile) {
   return {
     restrict: 'EA',
     scope: {
@@ -95,6 +96,29 @@ angular
       });
     }
   };
+})
+.directive('createQuestion', function ($http, $templateCache, $compile) {
+    return {    
+         scope: {
+            data: "=",
+        },
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            var templateUrl = '/../app/questions/questionBuilder/partials/questions/';
+
+             scope.$watch('data', function (newVal, oldVal) {
+                if (newVal) {
+                  $http.get(templateUrl + newVal.question_type + '.edit.html').success(function(data) {
+                    element.html(data);
+                    $compile(element.contents())(scope);
+                  });
+                  // console.log(templateUrl + newVal.question_type + '.edit.html');
+                 // element.html($templateCache.get(templateUrl + newVal.question_type + '.edit.html'));
+                 // $compile(element.contents())(scope);
+                }
+             });
+        }
+    };
 })
 .directive('questionBuilder', function () {
   return {
