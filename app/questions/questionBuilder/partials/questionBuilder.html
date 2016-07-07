@@ -6,8 +6,9 @@
       </div>
       <div class="panel-body">
         <div question-slider images="questionTypes" group="5" buildquestion="buildQuestion(item)" ></div>
-        <div create-question data="newQuestion"></div>
-        <!-- <button ng-click="saveNewQuestion(newQuestion)" class="btn btn-primary">Save</button> -->
+        <div create-question data="newQuestion" question="newQuestion"></div>
+        <div question-directive question="newQuestion"></div>
+        <button ng-click="saveNewQuestion(newQuestion)" class="btn btn-primary">Save</button>
       </div>
     </div>
   </div>
