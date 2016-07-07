@@ -1,26 +1,40 @@
 angular
 .module('questionsApp.questionBuilder')
-.directive('addNewQuestion', function($compile){
-  return function(scope, element, attrs){
-    element.bind("click", function(){
-      // console.log("addNewQuestion");
-      scope.count++;
-      angular.element(document.getElementById('newQuestion')).append($compile("<div question-builder></div>")(scope));
-    });
-  };
-})
-.directive('dynamicTemplate', function(){
+// .directive('addNewQuestion', function($compile){
+//   // injects directive for new question
+//   return function(scope, element, attrs){
+//     element.bind("click", function(){
+//       // console.log("addNewQuestion");
+//       scope.count++;
+//       angular.element(document.getElementById('newQuestion')).append($compile("<div question-builder></div>")(scope));
+//     });
+//   };
+// })
+.directive('questionTemplate', function(){
+  // question view : based on question_type and question_view changes template
   return {
     restrict: 'A',
     replace: true,
     scope: {
-      question: '=question'
+      question: '=question',
+      saveNewQuestion: '&'
     },
     template: '<div><div ng-include="var"></div></div>',
     controller: function($scope){
-      var path = 'app/questions/questionBuilder/partials/questions/';
+
+      switch($scope.question.question_view){
+        case 'create':
+        var path = 'app/questions/questionBuilder/partials/';
+        $scope.var = path + 'questionBuilder.html';
+        break;
+        default:
+        var path = 'app/questions/questionBuilder/partials/questions/';
+        $scope.var = path + $scope.question.question_type + '.' + $scope.question.question_view + '.html';
+        break;
+      };
+
       // $scope.var = path + 'template1.html';
-      $scope.var = path + $scope.question.question_type + '.' + $scope.question.question_view + '.html';
+      // $scope.var = path + $scope.question.question_type + '.' + $scope.question.question_view + '.html';
 
       $scope.change = function(where, view){
         $scope.question.question_view = view;
@@ -31,10 +45,29 @@ angular
         $scope.question.question_view = 'preview';
         $scope.var = path + question.question_type + '.' + 'preview' + '.html';
       };
+      // create new question button click
+      $scope.buildQuestion = function(item){
+        var newField = {
+          "question_id" : $scope.question.question_id,
+          "question_title" : "Question Text",
+          "question_type" : item.name,
+          "question_value" : "",
+          "question_required" : true,
+          "question_disabled" : false,
+          "question_view": 'create'
+        };
+
+        $scope.newQuestion = newField;
+        // $scope.question.question_type = item.name;
+        // $scope.question.question_value = "";
+        // $scope.question.question_required = true;
+        // $scope.question.question_disabled = false;
+      };
     }
   };
 })
 .directive('questionSlider', function (QuestionService, $compile) {
+  // slider for question types
   return {
     restrict: 'EA',
     scope: {
@@ -51,7 +84,8 @@ angular
         var images = [];
         var source = [];
 
-        angular.copy($scope.images, source);
+        // angular.copy($scope.images, source);
+        angular.copy(QuestionService.fields, source);
 
         for (var i = 0; i < source.length; i + $scope.group) {
           if (source[i]) {
@@ -98,114 +132,94 @@ angular
   };
 })
 .directive('createQuestion', function ($http, $templateCache, $compile) {
-    return {    
-         scope: {
-            data: "=",
-        },
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-            var templateUrl = '/../app/questions/questionBuilder/partials/questions/';
+  return {    
+   scope: {
+    newquestion: '='    
+  },
+  restrict: 'A',
+  link: function (scope, element, attrs) {
+    var templateUrl = '/../app/questions/questionBuilder/partials/questions/';
 
-             scope.$watch('data', function (newVal, oldVal) {
-                if (newVal) {
-                  $http.get(templateUrl + newVal.question_type + '.edit.html').success(function(data) {
-                    element.html(data);
-                    $compile(element.contents())(scope);
-                  });
-                  // console.log(templateUrl + newVal.question_type + '.edit.html');
-                 // element.html($templateCache.get(templateUrl + newVal.question_type + '.edit.html'));
-                 // $compile(element.contents())(scope);
-                }
-             });
-        }
-    };
-})
-.directive('questionBuilder', function () {
-  return {
-    restrict: 'A',
-    templateUrl: '/../app/questions/questionBuilder/partials/questionBuilder.html',
-    // scope: {
-    //   newQuestion: '=newQuestion'
-    // },
-    controller: function ($scope) {
-      // $scope.sortableOptions = {
-      //   handle: '> .myHandle',
-      //   placeholder: 'ui-state-highlight'
-      // };
-
-      // add new option to the field
-      $scope.addOption = function (question){
-        if(!question.question_options)
-          question.question_options = new Array();
-
-        var lastOptionID = 0;
-
-        if(question.question_options[question.question_options.length-1])
-          lastOptionID = question.question_options[question.question_options.length-1].option_id;
-
-        // new option's id
-        var option_id = lastOptionID + 1;
-
-        var newOption = {
-          "option_id" : option_id,
-          "option_title" : "Option " + option_id,
-          "option_value" : option_id
-        };
-
-        // put new option into field_options array
-        question.question_options.push(newOption);
-      };
-
-      // deletes particular question on button click
-      $scope.deleteQuestion = function (question_id){
-        for(var i = 0; i < $scope.group.group_questions.length; i++){
-          if($scope.group.group_questions[i].question_id == question_id){
-            $scope.group.group_questions.splice(i, 1);
-            break;
-          }
-        }
+    scope.$watch('newquestion', function (newVal, oldVal) {
+      if (newVal) {
+        $http.get(templateUrl + newVal.question_type + '.create.html').success(function(data) {
+          element.html(data);
+          $compile(element.contents())(scope);
+        });
       }
-
-      // delete particular option
-      $scope.deleteOption = function (question, option){
-        for(var i = 0; i < question.question_options.length; i++){
-          if(question.question_options[i].option_id == option.option_id){
-            question.question_options.splice(i, 1);
-            break;
-          }
-        }
-      };
-
-      $scope.showAddOptions = function (type){
-        if(type == "radio" || type == "dropdown"){
-          return true;
-        }
-        else{
-          return false;
-        }
-      };
-    }
+    });
   }
-  // return {
-  //   // controller: function($scope){
-  //           // $scope.save = function(){
-  //           //     alert('save me..');
-  //           //     $scope.group.submitted = true;
-  //           // }
+};
+})
+// .directive('questionBuilder', function () {
+//   return {
+//     restrict: 'A',
+//     templateUrl: '/../app/questions/questionBuilder/partials/questionBuilder.html',
+//     // scope: {
+//     //   newQuestion: '=newQuestion'
+//     // },
+//     controller: function ($scope) {
+//       // $scope.sortableOptions = {
+//       //   handle: '> .myHandle',
+//       //   placeholder: 'ui-state-highlight'
+//       // };
 
-  //           // $scope.cancel = function(){
-  //           //     alert('cancel me..');
-  //           // }
-  //         // },
-  //         templateUrl: '/../app/questions/questionBuilder/partials/form.html',
-  //         restrict: 'A',
-  //         scope: {
-  //           group:'='
-  //         }
-  //       };
-      })
+//       // add new option to the field
+//       $scope.addOption = function (question){
+//         if(!question.question_options)
+//           question.question_options = new Array();
+
+//         var lastOptionID = 0;
+
+//         if(question.question_options[question.question_options.length-1])
+//           lastOptionID = question.question_options[question.question_options.length-1].option_id;
+
+//         // new option's id
+//         var option_id = lastOptionID + 1;
+
+//         var newOption = {
+//           "option_id" : option_id,
+//           "option_title" : "Option " + option_id,
+//           "option_value" : option_id
+//         };
+
+//         // put new option into field_options array
+//         question.question_options.push(newOption);
+//       };
+
+//       // deletes particular question on button click
+//       $scope.deleteQuestion = function (question_id){
+//         for(var i = 0; i < $scope.group.group_questions.length; i++){
+//           if($scope.group.group_questions[i].question_id == question_id){
+//             $scope.group.group_questions.splice(i, 1);
+//             break;
+//           }
+//         }
+//       }
+
+//       // delete particular option
+//       $scope.deleteOption = function (question, option){
+//         for(var i = 0; i < question.question_options.length; i++){
+//           if(question.question_options[i].option_id == option.option_id){
+//             question.question_options.splice(i, 1);
+//             break;
+//           }
+//         }
+//       };
+
+//       $scope.showAddOptions = function (type){
+//         if(type == "radio" || type == "dropdown"){
+//           return true;
+//         }
+//         else{
+//           return false;
+//         }
+//       };
+//     }
+//   }
+// });
 .directive('questionDirective', function($http, $compile) {
-
+  // preview question
   var getTemplateUrl = function(field) {
     var type = field.question_type;
     var templateUrl = '/../app/questions/questionBuilder/partials/questions/';
@@ -235,17 +249,17 @@ angular
         // GET template content from path
         var templateUrl = getTemplateUrl(scope.question);
         $http.get(templateUrl).success(function(data) {
-            element.html(data);
-            $compile(element.contents())(scope);
+          element.html(data);
+          $compile(element.contents())(scope);
         });
-    }
+      }
 
-    return {
+      return {
         template: '<div ng-bind="question"></div>',
-        restrict: 'EA',
+        restrict: 'A',
         scope: {
-            question: '='
+          question: '=question'
         },
         link: linker
-    };
-  });
+      };
+    });
