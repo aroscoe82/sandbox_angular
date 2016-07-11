@@ -59,10 +59,14 @@ angular
         $scope.group.group_questions.push(defaultQuestion);
         break;
     };
+
+    $scope.saveQuestion = function(question){
+      console.log("saveQuestion");
+    };
   };
 
-  $scope.saveNewQuestion = function(newQuestion){
-    console.log('newQuestion: ' + newQuestion);
+  // $scope.saveNewQuestion = function(newQuestion){
+  //   console.log('newQuestion: ' + newQuestion);
 
     // $scope.questionlastAddedID++;
     // newQuestion.question_id = $scope.questionlastAddedID;
@@ -71,6 +75,6 @@ angular
 
     // $scope.newQuestion = '';
     // $scope.showQuestionBuilder = false;
-  };
+  // };
 
 }]);

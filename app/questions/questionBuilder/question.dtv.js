@@ -17,7 +17,8 @@ angular
     replace: true,
     scope: {
       question: '=question',
-      saveNewQuestion: '&'
+      // buildquestion: '&',
+      savequestion: '&'
     },
     template: '<div><div ng-include="var"></div></div>',
     controller: function($scope){
@@ -38,30 +39,35 @@ angular
 
       $scope.change = function(where, view){
         $scope.question.question_view = view;
+        var path = 'app/questions/questionBuilder/partials/questions/';
         $scope.var = path + where + '.' + view + '.html';
       };
-      $scope.save = function(question){
+      
+      $scope.saveQuestion = function(question){
         console.log("save question");
         $scope.question.question_view = 'preview';
+        var path = 'app/questions/questionBuilder/partials/questions/';
         $scope.var = path + question.question_type + '.' + 'preview' + '.html';
       };
+
       // create new question button click
       $scope.buildQuestion = function(item){
-        var newField = {
-          "question_id" : $scope.question.question_id,
-          "question_title" : "Question Text",
-          "question_type" : item.name,
-          "question_value" : "",
-          "question_required" : true,
-          "question_disabled" : false,
-          "question_view": 'create'
-        };
+        // var newQuestion = {
+        //   "question_id" : $scope.question.question_id,
+        //   "question_title" : "Question Text",
+        //   "question_type" : item.name,
+        //   "question_value" : "",
+        //   "question_required" : true,
+        //   "question_disabled" : false,
+        //   "question_view": 'create'
+        // };
 
-        $scope.newQuestion = newField;
-        // $scope.question.question_type = item.name;
-        // $scope.question.question_value = "";
-        // $scope.question.question_required = true;
-        // $scope.question.question_disabled = false;
+        // Amanda - need to know what values should be reset when swtiching between question types
+
+        $scope.question.question_type = item.name;
+        $scope.question.question_value = "";
+        $scope.question.question_required = true;
+        $scope.question.question_disabled = false;
       };
     }
   };
@@ -134,21 +140,34 @@ angular
 .directive('createQuestion', function ($http, $templateCache, $compile) {
   return {    
    scope: {
-    newquestion: '='    
+    question: '=question',
+    savequestion: '&'
   },
   restrict: 'A',
   link: function (scope, element, attrs) {
     var templateUrl = '/../app/questions/questionBuilder/partials/questions/';
 
-    scope.$watch('newquestion', function (newVal, oldVal) {
+    scope.$watch('question.question_type', function (newVal, oldVal) {
       if (newVal) {
-        $http.get(templateUrl + newVal.question_type + '.create.html').success(function(data) {
+        // console.log('question_type changed to ' + newVal);
+        $http.get(templateUrl + newVal + '.edit.html').success(function(data) {
           element.html(data);
           $compile(element.contents())(scope);
         });
       }
-    });
-  }
+    }, true);
+
+    // scope.save = function(){
+    //   console.log("save called");
+    //   console.log("question: " + scope.question);
+      // scope.saveQuestion({question: scope.question});
+    // };
+  },
+  // controller: function ($scope){
+  //   $scope.save = function(question){
+  //     console.log("another save");
+  //   };
+  // }
 };
 })
 // .directive('questionBuilder', function () {
