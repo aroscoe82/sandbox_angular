@@ -311,9 +311,11 @@ ul.unstyled { list-style: none; padding-left: 0; }
 .ui-state-highlight { /*min-height: 3em; line-height: 3em;*/ background-color:#0c7bc6; margin: 0 -15px; padding-top: 2em;
     padding-bottom: 2em;}
 
-.question-container { padding-top: 2em; padding-bottom: 2em;  position: relative; border-bottom: 1px solid #ddd; background-color: #eee; }
+.question-container { position: relative; border-bottom: 1px solid #ddd; }
+.question-container.preview, .question-container.edit  { padding-top: 2em; padding-bottom: 2em; background-color: #eee; }
 
-.question-container:hover .options-block {
+.question-container.preview:hover .options-block,
+.question-container.edit:hover .options-block {
   opacity: 1;
   left: 0;
 }

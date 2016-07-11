@@ -60,8 +60,8 @@ angular
         break;
     };
 
-    $scope.saveQuestion = function(question){
-      console.log("saveQuestion");
+    $scope.save = function(question){
+      console.log("saveQuestion in controller");
     };
   };
 

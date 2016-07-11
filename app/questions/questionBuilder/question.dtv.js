@@ -18,6 +18,7 @@ angular
     scope: {
       question: '=',
       // buildquestion: '&',
+      save: '&'
     },
     template: '<div><div ng-include="var"></div></div>',
     controller: function($scope){
@@ -42,31 +43,25 @@ angular
         $scope.var = path + where + '.' + view + '.html';
       };
 
-      $scope.savequestion = function(question){
+      $scope.savequestion = function(){
         console.log("I'm over here!, I was called from edit. I live within the question-template directive");
-        console.log("question: " + question);
-        saveMe(question);
-
-        // Change my view location
-        // $scope.question.question_view = 'preview';
-        // var path = 'app/questions/questionBuilder/partials/questions/';
-        // $scope.var = path + question.question_type + '.' + 'preview' + '.html';
-      };
-      
-      $scope.saveQuestion = function(question){
-        console.log("I was called from the create-question directive, I live two levels deep: question-template > question-builder.");
-        console.log("question: " + question);
-        saveMe(question);
+        $scope.save();
 
         // Change my view location
         $scope.question.question_view = 'preview';
         var path = 'app/questions/questionBuilder/partials/questions/';
-        $scope.var = path + question.question_type + '.' + 'preview' + '.html';
+        $scope.var = path + $scope.question.question_type + '.' + 'preview' + '.html';
       };
+      
+      $scope.saveQuestion = function(){
+        console.log("I was called from the create-question directive, I live two levels deep: question-template > question-builder.");
+        $scope.save();
 
-      function saveMe(question){
-        console.log("Save ME!!!! : " + question);
-      }
+        // Change my view location
+        $scope.question.question_view = 'preview';
+        var path = 'app/questions/questionBuilder/partials/questions/';
+        $scope.var = path + $scope.question.question_type + '.' + 'preview' + '.html';
+      };
 
       // create new question button click
       $scope.buildQuestion = function(item){
