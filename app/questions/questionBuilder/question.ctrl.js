@@ -61,7 +61,7 @@ angular
     };
 
     $scope.save = function(question){
-      console.log("saveQuestion in controller");
+      console.log("saveQuestion in controller: ", question);
     };
   };
 
