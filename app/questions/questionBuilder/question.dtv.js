@@ -16,9 +16,8 @@ angular
     restrict: 'A',
     replace: true,
     scope: {
-      question: '=question',
+      question: '=',
       // buildquestion: '&',
-      savequestion: '&'
     },
     template: '<div><div ng-include="var"></div></div>',
     controller: function($scope){
@@ -42,13 +41,32 @@ angular
         var path = 'app/questions/questionBuilder/partials/questions/';
         $scope.var = path + where + '.' + view + '.html';
       };
+
+      $scope.savequestion = function(question){
+        console.log("I'm over here!, I was called from edit. I live within the question-template directive");
+        console.log("question: " + question);
+        saveMe(question);
+
+        // Change my view location
+        // $scope.question.question_view = 'preview';
+        // var path = 'app/questions/questionBuilder/partials/questions/';
+        // $scope.var = path + question.question_type + '.' + 'preview' + '.html';
+      };
       
       $scope.saveQuestion = function(question){
-        console.log("save question");
+        console.log("I was called from the create-question directive, I live two levels deep: question-template > question-builder.");
+        console.log("question: " + question);
+        saveMe(question);
+
+        // Change my view location
         $scope.question.question_view = 'preview';
         var path = 'app/questions/questionBuilder/partials/questions/';
         $scope.var = path + question.question_type + '.' + 'preview' + '.html';
       };
+
+      function saveMe(question){
+        console.log("Save ME!!!! : " + question);
+      }
 
       // create new question button click
       $scope.buildQuestion = function(item){
