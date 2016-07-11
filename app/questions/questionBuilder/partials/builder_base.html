@@ -21,11 +21,11 @@
   <ul ui-sortable="sortableOptions" ng-model="group.group_questions" class="list-unstyled" >
     <li ng-repeat="question in group.group_questions" class="ui-state-default question-container row">
       <div question-template question="question"></div>
-      <!-- <div ng-if="($index + 1) != group.group_questions.length" class="options-block text-center">
+      <div ng-if="($index + 1) != group.group_questions.length" class="options-block text-center">
         <div class="btn-group">
-          <button ng-click="addNewQuestion('mid', $index+1)" class="btn btn-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> Insert Question</button>
+          <button ng-click="addNewQuestion('mid', $index+1, 'create')" class="btn btn-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> Insert Question</button>
         </div>
-      </div> -->
+      </div>
     </li>
   </ul>
 
