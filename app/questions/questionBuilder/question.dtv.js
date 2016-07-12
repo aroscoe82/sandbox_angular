@@ -15,11 +15,7 @@ angular
   return {
     restrict: 'A',
     replace: true,
-    scope: {
-      question: '=',
-      // buildquestion: '&',
-      save: '&'
-    },
+    scope: false,
     template: '<div><div ng-include="var"></div></div>',
     controller: function($scope){
 
@@ -34,28 +30,14 @@ angular
         break;
       };
 
-      // $scope.var = path + 'template1.html';
-      // $scope.var = path + $scope.question.question_type + '.' + $scope.question.question_view + '.html';
-
       $scope.change = function(where, view){
         $scope.question.question_view = view;
         var path = 'app/questions/questionBuilder/partials/questions/';
         $scope.var = path + where + '.' + view + '.html';
       };
 
-      $scope.savequestion = function(){
-        console.log("I'm over here!, I was called from edit. I live within the question-template directive");
-        $scope.save();
-
-        // Change my view location
-        $scope.question.question_view = 'preview';
-        var path = 'app/questions/questionBuilder/partials/questions/';
-        $scope.var = path + $scope.question.question_type + '.' + 'preview' + '.html';
-      };
-      
-      $scope.saveQuestion = function(){
-        console.log("I was called from the create-question directive, I live two levels deep: question-template > question-builder.");
-        $scope.save();
+      $scope.savequestion = function(question){
+        $scope.save(question);
 
         // Change my view location
         $scope.question.question_view = 'preview';
@@ -65,16 +47,6 @@ angular
 
       // create new question button click
       $scope.buildQuestion = function(item){
-        // var newQuestion = {
-        //   "question_id" : $scope.question.question_id,
-        //   "question_title" : "Question Text",
-        //   "question_type" : item.name,
-        //   "question_value" : "",
-        //   "question_required" : true,
-        //   "question_disabled" : false,
-        //   "question_view": 'create'
-        // };
-
         // Amanda - need to know what values should be reset when swtiching between question types
 
         $scope.question.question_type = item.name;
@@ -83,6 +55,13 @@ angular
         $scope.question.question_disabled = false;
       };
     }
+  };
+})
+.directive('questionOptions', function(){
+  return {
+    restrict: 'A',
+    scope: false,
+    templateUrl: 'app/questions/questionBuilder/partials/question_options.html'
   };
 })
 .directive('questionSlider', function (QuestionService, $compile) {
@@ -152,10 +131,12 @@ angular
 })
 .directive('createQuestion', function ($http, $templateCache, $compile) {
   return {    
-   scope: {
-    question: '=question',
-    savequestion: '&'
-  },
+  //  scope: {
+  //   question: '=question',
+  //   savequestion: '&',
+  //   removequestion: '&'
+  // },
+  scope: false,
   restrict: 'A',
   link: function (scope, element, attrs) {
     var templateUrl = '/../app/questions/questionBuilder/partials/questions/';
@@ -169,18 +150,7 @@ angular
         });
       }
     }, true);
-
-    // scope.save = function(){
-    //   console.log("save called");
-    //   console.log("question: " + scope.question);
-      // scope.saveQuestion({question: scope.question});
-    // };
   },
-  // controller: function ($scope){
-  //   $scope.save = function(question){
-  //     console.log("another save");
-  //   };
-  // }
 };
 })
 // .directive('questionBuilder', function () {
@@ -289,9 +259,10 @@ angular
       return {
         template: '<div ng-bind="question"></div>',
         restrict: 'A',
-        scope: {
-          question: '=question'
-        },
+        // scope: {
+        //   question: '=question',
+        // },
+        scope: false,
         link: linker
       };
     });

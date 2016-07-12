@@ -61,8 +61,60 @@ angular
     };
 
     $scope.save = function(question){
-      console.log("saveQuestion in controller: ", question);
+      console.log("save in controller: " , question);
     };
+
+    $scope.remove = function(question){
+      console.log('remove question: ' , question);
+
+      for(var i = 0; i < $scope.group.group_questions.length; i++){
+        if($scope.group.group_questions[i].question_id == question.question_id){
+          $scope.group.group_questions.splice(i, 1);
+          console.log('Removed');
+          break;
+        }
+      }
+    };
+    $scope.addOption = function (question){
+      if(!question.question_options)
+        question.question_options = new Array();
+
+      var lastOptionID = 0;
+
+      if(question.question_options[question.question_options.length-1])
+        lastOptionID = question.question_options[question.question_options.length-1].option_id;
+
+        // new option's id
+        var option_id = lastOptionID + 1;
+
+        var newOption = {
+          "option_id" : option_id,
+          "option_title" : "Option " + option_id,
+          "option_value" : option_id
+        };
+
+        // put new option into field_options array
+        question.question_options.push(newOption);
+      };
+
+      // delete particular option
+      $scope.deleteOption = function (question, option){
+        for(var i = 0; i < question.question_options.length; i++){
+          if(question.question_options[i].option_id == option.option_id){
+            question.question_options.splice(i, 1);
+            break;
+          }
+        }
+      };
+
+      $scope.showAddOptions = function (type){
+        if(type == "radio" || type == "dropdown"){
+          return true;
+        }
+        else{
+          return false;
+        }
+      };
   };
 
   // $scope.saveNewQuestion = function(newQuestion){
