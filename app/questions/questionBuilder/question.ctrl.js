@@ -6,7 +6,7 @@ var __indexOf = [].indexOf || function(item) {
 };
 
 angular
-.module('questionsApp.questionBuilder', ['ui.router', 'ui.sortable'])
+.module('questionsApp.questionBuilder', ['ui.router', 'ui.sortable', 'questionsApp.config', 'questionsApp.core'])
 .config(function($stateProvider, $urlRouterProvider){
 
   $stateProvider
@@ -18,7 +18,7 @@ angular
 
   $urlRouterProvider.otherwise('/');
 })
-.controller('questionGroupController',[ '$scope', 'QuestionService', function($scope, QuestionService){
+.controller('questionGroupController',[ '$scope', 'QuestionService', 'QuestionGroupItemPost', 'questionGroup', function($scope, QuestionService, QuestionGroupItemPost, questionGroup){
 
   $scope.sortableOptions = {
     handle: '.myHandle',
@@ -29,10 +29,10 @@ angular
 
   // new form
   $scope.group = {};
-  $scope.group.group_id = 1;
+  $scope.group.group_id = questionGroup.getId();
   $scope.group.group_name = 'Question Sandbox';
   $scope.group.group_questions = [];
-  $scope.questionlastAddedID = 0;
+  $scope.questionlastAddedID = -1;
   
   $scope.questionTypes = QuestionService.fields;
 
@@ -40,7 +40,7 @@ angular
     $scope.questionlastAddedID++;
     var defaultQuestion = {
       "question_id" : $scope.questionlastAddedID,
-      "question_title" : "Question - " + ($scope.questionlastAddedID),
+      "text" : "Question - " + ($scope.questionlastAddedID),
       // "question_type" : $scope.questionTypes[0].name,
       // "question_value" : "",
       // "question_required" : true,
@@ -61,7 +61,14 @@ angular
     };
 
     $scope.save = function(question){
-      console.log("save in controller: " , question);
+      var questionItem = new QuestionGroupItemPost(question);
+      questionItem.$save(
+        function(data) {
+          $scope.questionlastAddedID = data.index;
+          console.log("save in controller: " , data);
+
+        }
+      );
     };
 
     $scope.remove = function(question){

@@ -5,11 +5,11 @@
   </div>
   <div class="row">
     <div class="col-sm-2">Question Type:</div>
-    <div class="col-sm-4">{{question.question_type}}</div>
+    <div class="col-sm-4">{{question.type}}</div>
   </div>
   <div class="row">
     <div class="col-sm-2">Question Text:</div>
-    <div class="col-sm-4"><input type="text" ng-model="question.question_title" value="{{question.question_title}}"></div>
+    <div class="col-sm-4"><input type="text" ng-model="question.text" value="{{question.text}}"></div>
   </div>
   <div class="row">
     <div class="col-sm-2">Question Default Value:</div>
@@ -19,7 +19,7 @@
     <div class="col-sm-2">Question Options:</div>
     <div class="col-sm-6">
       <div ng-repeat="option in question.question_options">
-        <input type="text" ng-model="option.option_title" value="{{option.option_title}}">
+        <input type="text" ng-model="option.displayValue" value="{{option.displayValue}}">
         <a class="btn btn-danger btn-xs right" type="button" ng-click="deleteOption(question, option)"><i class="fa fa-minus fa-white"></i></a>
         <span class="label label-inverse">Value: {{ option.option_value }}</span>
       </div>
@@ -30,11 +30,11 @@
     <div class="col-sm-2">Required:</div>
     <div class="col-sm-4">
       <label>
-        <input type="radio" ng-value="true" ng-selected ng-model="question.question_required"/>
+        <input type="radio" ng-value="true" ng-selected ng-model="question.requiredFlag"/>
         &nbsp; Yes
       </label>
       <label>
-        <input type="radio" ng-value="false" ng-model="question.question_required"/>
+        <input type="radio" ng-value="false" ng-model="question.requiredFlag"/>
         &nbsp; No
       </label>
     </div>

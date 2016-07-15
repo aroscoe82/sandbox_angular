@@ -26,7 +26,7 @@ angular
         break;
         default:
         var path = 'app/questions/questionBuilder/partials/questions/';
-        $scope.var = path + $scope.question.question_type + '.' + $scope.question.question_view + '.html';
+        $scope.var = path + $scope.question.type + '.' + $scope.question.question_view + '.html';
         break;
       };
 
@@ -42,16 +42,16 @@ angular
         // Change my view location
         $scope.question.question_view = 'preview';
         var path = 'app/questions/questionBuilder/partials/questions/';
-        $scope.var = path + $scope.question.question_type + '.' + 'preview' + '.html';
+        $scope.var = path + $scope.question.type + '.' + 'preview' + '.html';
       };
 
       // create new question button click
       $scope.buildQuestion = function(item){
         // Amanda - need to know what values should be reset when swtiching between question types
 
-        $scope.question.question_type = item.name;
+        $scope.question.type = item.name;
         $scope.question.question_value = "";
-        $scope.question.question_required = true;
+        $scope.question.requiredFlag = true;
         $scope.question.question_disabled = false;
       };
     }
@@ -141,7 +141,7 @@ angular
   link: function (scope, element, attrs) {
     var templateUrl = '/../app/questions/questionBuilder/partials/questions/';
 
-    scope.$watch('question.question_type', function (newVal, oldVal) {
+    scope.$watch('question.type', function (newVal, oldVal) {
       if (newVal) {
         // console.log('question_type changed to ' + newVal);
         $http.get(templateUrl + newVal + '.edit.html').success(function(data) {
@@ -223,10 +223,10 @@ angular
 .directive('questionDirective', function($http, $compile) {
   // preview question
   var getTemplateUrl = function(field) {
-    var type = field.question_type;
+    var type = field.type;
     var templateUrl = '/../app/questions/questionBuilder/partials/questions/';
     var supported_questions = [
-    'textbox',
+    'textAnswer',
     'radio',
     // 'radio_grid',
     'dropdown',

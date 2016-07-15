@@ -1,5 +1,5 @@
 'use strict';
 
 angular
-  .module('questionsApp.questionBuilder', ['ui.router', 'ngResource']);
+  .module('questionsApp.questionBuilder', ['ui.router', 'ngResource', 'questionsApp.config', 'questionsApp.core']);
 

@@ -8,7 +8,7 @@ angular
     return {
         fields:[
             {
-                name : 'textbox',
+                name : 'textAnswer',
                 value : 'Textbox',
                 image: 'images/' + prefix_name + 'textbox.png',
                 description: 'Textbox'

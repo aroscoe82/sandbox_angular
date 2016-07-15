@@ -8,9 +8,9 @@
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <input ng-model="question.question_value" id="{{question.question_id}}" type="checkbox" ng-true-value="1" ng-false-value="0" ng-required="question.question_required" ng-disabled="question.question_disabled"/>
-          <label class="question-label" for="{{question.question_id}}" ng-cloak>{{question.question_title}}</label>
-          <span class="required-error" ng-show="question.question_required && question.question_value == 0">(* required)</span>
+          <input ng-model="question.question_value" id="{{question.question_id}}" type="checkbox" ng-true-value="1" ng-false-value="0" ng-required="question.requiredFlag" ng-disabled="question.question_disabled"/>
+          <label class="question-label" for="{{question.question_id}}" ng-cloak>{{question.text}}</label>
+          <span class="required-error" ng-show="question.requiredFlag && question.question_value == 0">(* required)</span>
         </div>
       </div>
     </div>

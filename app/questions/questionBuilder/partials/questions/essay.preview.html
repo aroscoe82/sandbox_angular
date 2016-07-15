@@ -7,10 +7,10 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-2">{{question.question_title}}:</div>
+        <div class="col-sm-2">{{question.text}}:</div>
         <div class="col-sm-4">
-            <textarea type="text" ng-model="question.question_value" value="{{question.question_value}}" ng-required="question.question_required" ng-disabled="question.question_disabled"></textarea>
-            <span class="required-error" ng-show="question.question_required && !question.question_value">* required</span>
+            <textarea type="text" ng-model="question.question_value" value="{{question.question_value}}" ng-required="question.requiredFlag" ng-disabled="question.question_disabled"></textarea>
+            <span class="required-error" ng-show="question.requiredFlag && !question.question_value">* required</span>
         </div>
       </div>
     </div>
