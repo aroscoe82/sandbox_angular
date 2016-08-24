@@ -1,44 +1,33 @@
-<h1>Testing - Sample Data Pagination and Sorting</h1>
+<div class="container" ng-controller="membersViewController" ng-init="init()">
+    <div>
+        <input type="text" class="form-control" placeholder="Search" ng-model="search" />
+        <br />
+    </div>
 
- <table class="table table-striped table-condensed table-hover">
-                <thead>
+    <table class="table table-striped table-condensed table-hover">
+        <thead>
 
-                    <tr>
-                        <th class="id" custom-sort order="'id'" sort="sort">Id&nbsp;</th>
-                        <th class="first_name" custom-sort order="'first_name'" sort="sort">First Name&nbsp;</th>
-                        <th class="last_name" custom-sort order="'last_name'" sort="sort">Last Name&nbsp;</th>
-                        <th class="company" custom-sort order="'company'" sort="sort">Company&nbsp;</th>
-                        <th class="email" custom-sort order="'email'" sort="sort">Email&nbsp;</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <td colspan="6">
-                        <nav>
-                            <ul class="pagination pull-right">
-                                <li ng-class="{disabled: currentPage == 0}">
-                                    <a href ng-click="prevPage()">« Prev</a>
-                                </li>
-                            
-                                <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
-                                    ng-class="{active: n == currentPage}"
-                                ng-click="setPage()">
-                                    <a href ng-bind="n + 1">1</a>
-                                </li>
-                             
-                                <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
-                                    <a href ng-click="nextPage()">Next »</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </td>
-                </tfoot>
-                <tbody>
-                    <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse">
-                        <td>{{item.id}}</td>
-                        <td>{{item.first_name}}</td>
-                        <td>{{item.last_name}}</td>
-                        <td>{{item.company}}</td>
-                        <td>{{item.email}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <tr>
+                <th class="id" custom-sort order="'id'" sort="sort">Id&nbsp;</th>
+                <th class="first_name" custom-sort order="'first_name'" sort="sort">First Name&nbsp;</th>
+                <th class="last_name" custom-sort order="'last_name'" sort="sort">Last Name&nbsp;</th>
+                <th class="company" custom-sort order="'company'" sort="sort">Company&nbsp;</th>
+                <th class="email" custom-sort order="'email'" sort="sort">Email&nbsp;</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <td colspan="6">
+                <pagination total-items="filterList.length" items-per-page="pageSize" ng-model="currentPage" max-size="5" class="pagination-sm"></pagination>
+            </td>
+        </tfoot>
+        <tbody>
+            <tr ng-repeat="item in filterList | start: (currentPage - 1) * pageSize | limitTo: pageSize">
+                <td>{{item.id}}</td>
+                <td>{{item.first_name}}</td>
+                <td>{{item.last_name}}</td>
+                <td>{{item.company}}</td>
+                <td>{{item.email}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
