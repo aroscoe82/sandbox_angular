@@ -21,6 +21,16 @@ angular
     sortingOrder : 'email',
     reverse : false
   };
+
+  // testing defined status
+  $scope.setSomething = function(){
+    $scope.sort = {       
+      sortingOrder : 'first_name',
+      reverse : true
+    };
+    $scope.setPage = 2;
+    $scope.search = 'car';
+  };
   
   $scope.init = function () {
     $http.get('app/membersApp/members/data/MOCK_DATA.json').success(function (data) {
@@ -33,7 +43,7 @@ angular
             angular.lowercase(row.first_name).indexOf(angular.lowercase($scope.search) || '') !== -1 || 
             angular.lowercase(row.last_name).indexOf(angular.lowercase($scope.search) || '') !== -1);
         });
-        $scope.currentPage = 1;
+        $scope.currentPage = $scope.search ? $scope.setPage : 1;
       });
     });
   };
