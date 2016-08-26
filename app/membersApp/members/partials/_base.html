@@ -1,32 +1,42 @@
 <div class="container" ng-controller="membersViewController" ng-init="init()">
-    <div>
-        <input type="text" class="form-control" placeholder="Search" ng-model="search" />
-        <br />
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Members</h1> 
+        <pre>((currentPage) * pageSize) = {{ ((currentPage) * pageSize) }}</pre>
+        <pre>pageSize = {{ pageSize }}</pre>
+        <pre>filterList.length = {{ filterList.length }}</pre>
+        <p class="disabled">(Showing {{ (currentPage -1) * pageSize }}-{{ filterList.length > ((currentPage -1) * pageSize) ? ((currentPage) * pageSize) : filterList.length }} of {{ filterList.length }})</p>
     </div>
-
-    <table class="table table-striped table-condensed table-hover">
+</div>
+    <form class="form-inline">
+      <div class="form-group">
+        <label class="sr-only" for="search">Search</label>
+        <div class="input-group">
+          <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+          <input ng-model="search" type="text" class="form-control" id="search" placeholder="Search">
+      </div>
+    </div>
+    </form>
+    <table class="table table-striped table-condensed">
         <thead>
-
             <tr>
-                <th class="id" custom-sort order="'id'" sort="sort">Id&nbsp;</th>
+                <th class="email" custom-sort order="'email'" sort="sort">Username&nbsp;</th>
                 <th class="first_name" custom-sort order="'first_name'" sort="sort">First Name&nbsp;</th>
                 <th class="last_name" custom-sort order="'last_name'" sort="sort">Last Name&nbsp;</th>
-                <th class="company" custom-sort order="'company'" sort="sort">Company&nbsp;</th>
-                <th class="email" custom-sort order="'email'" sort="sort">Email&nbsp;</th>
+                <th class="guid">GUID&nbsp;</th>
             </tr>
         </thead>
         <tfoot>
-            <td colspan="6">
+            <td colspan="4">
                 <pagination total-items="filterList.length" items-per-page="pageSize" ng-model="currentPage" max-size="5" class="pagination-sm"></pagination>
             </td>
         </tfoot>
         <tbody>
-            <tr ng-repeat="item in filterList | start: (currentPage - 1) * pageSize | limitTo: pageSize">
-                <td>{{item.id}}</td>
+            <tr ng-repeat="item in filterList | start: (currentPage - 1) * pageSize | limitTo: pageSize | orderBy:sort.sortingOrder:sort.reverse">
+                <td>{{item.email}}</td>
                 <td>{{item.first_name}}</td>
                 <td>{{item.last_name}}</td>
-                <td>{{item.company}}</td>
-                <td>{{item.email}}</td>
+                <td>{{item.guid}}</td>
             </tr>
         </tbody>
     </table>
