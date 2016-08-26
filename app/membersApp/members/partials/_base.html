@@ -2,10 +2,7 @@
 <div class="row">
     <div class="col-xs-12">
         <h1>Members</h1> 
-        <pre>((currentPage) * pageSize) = {{ ((currentPage) * pageSize) }}</pre>
-        <pre>pageSize = {{ pageSize }}</pre>
-        <pre>filterList.length = {{ filterList.length }}</pre>
-        <p class="disabled">(Showing {{ (currentPage -1) * pageSize }}-{{ filterList.length > ((currentPage -1) * pageSize) ? ((currentPage) * pageSize) : filterList.length }} of {{ filterList.length }})</p>
+        <p class="disabled">(Showing {{ ((currentPage -1) * pageSize)+1 }}-{{ numPages == currentPage ? filterList.length : ((currentPage) * pageSize) }} of {{ filterList.length }})</p>
     </div>
 </div>
     <form class="form-inline">
@@ -28,7 +25,7 @@
         </thead>
         <tfoot>
             <td colspan="4">
-                <pagination total-items="filterList.length" items-per-page="pageSize" ng-model="currentPage" max-size="5" class="pagination-sm"></pagination>
+                <pagination total-items="filterList.length" items-per-page="pageSize" ng-model="currentPage" max-size="5" boundary-links="true" rotate="false" num-pages="numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" class="pagination-sm"></pagination>
             </td>
         </tfoot>
         <tbody>
