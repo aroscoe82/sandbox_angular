@@ -29,7 +29,7 @@
             </td>
         </tfoot>
         <tbody>
-            <tr ng-repeat="item in filterList | start: (currentPage - 1) * pageSize | limitTo: pageSize | orderBy:sort.sortingOrder:sort.reverse">
+            <tr ng-repeat="item in filterList | orderBy:sort.sortingOrder:sort.reverse | start: (currentPage - 1) * pageSize | limitTo: pageSize | orderBy:sort.sortingOrder:sort.reverse">
                 <td>{{item.email}}</td>
                 <td>{{item.first_name}}</td>
                 <td>{{item.last_name}}</td>
