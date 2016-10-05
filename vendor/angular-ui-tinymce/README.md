@@ -1,11 +1,10 @@
-# UI Tinymce - [AngularJS](http://angularjs.org/) directive for [TinyMCE](http://tinymce.com).
+# ui-tinymce directive [![Build Status](https://travis-ci.org/angular-ui/ui-tinymce.png)](https://travis-ci.org/angular-ui/ui-tinymce)
 
-[![Build Status](https://travis-ci.org/angular-ui/ui-tinymce.png)](https://travis-ci.org/angular-ui/ui-tinymce) 
-[![Join the chat at https://gitter.im/angular-ui/ui-tinymce](https://badges.gitter.im/angular-ui/ui-tinymce.svg)](https://gitter.im/angular-ui/ui-tinymce?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+This directive allows you to add a TinyMCE editor to your form elements.
 
 # Requirements
 
-- AngularJS 1.4.x or higher and it has been tested with Angular 1.4.8.
+- AngularJS
 - TinyMCE 4
 
 # Testing
@@ -100,7 +99,6 @@ In addition, it supports these additional optional options
 - `format` Format to get content as, i.e. 'raw' for raw HTML, or 'text' for text only. Defaults to 'html'. Documentation [here](http://www.tinymce.com/wiki.php/api4:method.tinymce.Editor.getContent)
 - `trusted` When `true`, all TinyMCE content that is set to `ngModel` will be whitelisted by `$sce`
 - `baseURL` This will set [baseURL property on the EditorManager](https://www.tinymce.com/docs/api/class/tinymce.editormanager/)
-- `debounce` This will debounce the model update which helps with performance of editors with large text. Defaults to true.
 
 This option is only supported when present on the `uiTinymceConfig` global injectable - this injectable needs to be an object.
 

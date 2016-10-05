@@ -27,15 +27,31 @@
   <!-- <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
 
-  <script src="app/membersApp/members.js"></script>
+  <!-- <script src="app/membersApp/members.js"></script>
   <script src="app/membersApp/members/module.js"></script>
   <script src="app/membersApp/members/members.ctrl.js"></script>
-  <script src="app/membersApp/members/members.svc.js"></script>
+  <script src="app/membersApp/members/members.svc.js"></script> -->
+
+  <script src="app/modal/modal-templates.js"></script>
+  <script src="app/modal/modal.svc.js"></script>
+  <!-- <script src="app/modal/modal.js"></script> -->
+
+  <script src="app/testing/testing.js"></script>
   
 </head>
 <body>
-<div class="container" ng-app="membersApp">
+<!-- <div class="container" ng-app="membersApp">
   <div ui-view></div>
+</div> -->
+
+<!-- <div class="container" ng-app="core.modal" ng-controller="ModalDemoCtrl">
+  <button class="btn btn-default" ng-click="open()">Open me!</button>
+  <p>Message: {{msg}}</p>
+</div> -->
+
+<div class="container" ng-app="testingApp" ng-controller="testingCtrl">
+  <button ng-click="testProfile()" class="btn btn-primary">Testing Profile</button>
+  <button ng-click="testBasic()" class="btn btn-primary">Testing Basic</button>
 </div>
 </body>
 </html>
