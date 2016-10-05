@@ -1,0 +1,135 @@
+<style>
+  .profile-img img { display: block; width: 100%; margin: 1em 0;}
+</style>
+<script type="text/ng-template" id="customTemplate.html">
+  <a>
+    <img ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/{{match.model.flag}}" width="16">
+    <span ng-bind-html="match.label | typeaheadHighlight:query"></span>
+  </a>
+</script>
+<div class="container" ng-controller="membersDetailController">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Member Detail</h1> 
+    </div>
+  </div>
+  <form class="form-horizontal">
+    <div class="row">
+          <div class="span2">
+            <div class="profile-img">
+              <img src="http://placehold.it/150x150" class="img-circle">
+            </div>
+            <p class="text-center">
+              <button class="btn">Choose File</button>
+            </p>
+          </div>
+          <div class="span10">
+            <legend>Profile</legend>
+            <div class="control-group">
+              <label class="control-label" for="inputFirstName">First Name: </label>
+              <div class="controls">
+                <input type="text" id="inputFirstName">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="inputLastName">Last Name: </label>
+              <div class="controls">
+                <input type="text" id="inputLastName">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="inputEmail">Email</label>
+              <div class="controls">
+                <input type="text" id="inputEmail">
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <label class="checkbox">
+                  <input type="checkbox"> Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
+                </label>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div class="row">
+      <div class="span10 offset2">
+      <legend>Assigned Manager</legend>
+      <div class="control-group">
+        <label class="control-label" for="inputManager">Manager</label>
+        <div class="controls">
+          <!-- <input type="text" id="inputManager"> -->
+          <input type="text" ng-model="inputManager" typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}" typeahead-template-url="customTemplate.html" class="form-control">
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span10 offset2">
+      <legend>Additional Info</legend>
+      <div class="control-group">
+        <label class="control-label" for="inputOrganization">Organization</label>
+        <div class="controls">
+          <input type="text" id="inputOrganization">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="inputTitle">Title</label>
+        <div class="controls">
+          <input type="text" id="inputTitle">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="inputLocation">Location</label>
+        <div class="controls">
+          <input type="text" id="inputLocation">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="inputRegion">Region</label>
+        <div class="controls">
+          <input type="text" id="inputRegion">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="inputCareerLevel">Career Level</label>
+        <div class="controls">
+          <input type="text" id="inputCareerLevel">
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="inputAbout">About</label>
+        <div class="controls">
+          <textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel"></textarea>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="inputOrganization1">Organization 1</label>
+        <div class="controls">
+          <input type="text" id="inputOrganization1">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="inputOrganization2">Organization 2</label>
+        <div class="controls">
+          <input type="text" id="inputOrganization2">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="inputOrganization3">Organization 3</label>
+        <div class="controls">
+          <input type="text" id="inputOrganization3">
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="control-group">
+        <button class="btn btn-link">Cancel</button>
+        <button type="submit" class="btn">Sign in</button>
+      </div>
+    </div>
+  </form>
+</div>

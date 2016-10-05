@@ -2,7 +2,6 @@
 <div class="row">
     <div class="col-xs-12">
         <h1>Members</h1> 
-        
     </div>
 </div>
 <pre>Sorting: {{sort}}</pre>
@@ -34,6 +33,7 @@
                 <th class="guid">GUID&nbsp;</th>
                 <th class="last_login">Last Login&nbsp;</th>
                 <th class="status">Status&nbsp;</th>
+                <th class="view">&nbsp;</th>
             </tr>
         </thead>
         <tfoot>
@@ -49,6 +49,7 @@
                 <td>{{item.guid}}</td>
                 <td>{{item.last_login * 1000 | date: 'MMM d, y h:mm:ss a' }}</td>
                 <td>{{item.status}}</td>
+                <td><a ui-sref="members.detail({ id: item.guid })">Detail</a></td>
             </tr>
         </tbody>
     </table>
