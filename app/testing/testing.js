@@ -30,7 +30,7 @@ angular
     $scope.testBasic = function () {
 
         var header = 'Basic Modal';
-        var body = '<ul><li>Test 1</li><li>Test 2</li></ul>';
+        var body = '<ul><li>Test 1</li><li>Test 2</li></ul><textarea ng-model="txt"></textarea>';
 
         var modalDefaults = {
           templateUrl: 'modal/templates/basic.html'
@@ -48,6 +48,34 @@ angular
             //     $location.path('/customers');
             // }, processError);
             console.log('testing');
+        });
+    };
+
+    $scope.testEmail = function () {
+
+        var header = 'Email Modal';
+        var email = {
+          heading: 'Sample Subject',
+          body: 'Sample Text'
+        };
+
+        var modalDefaults = {
+          templateUrl: 'modal/templates/email.html'
+        };
+
+        var modalOptions = {
+            closeButtonText: 'Close',
+            actionButtonText: 'Ok',
+            headerText: header,
+            email: {
+              heading: 'Sample Subject',
+              body: 'Sample Text'
+            }
+        };
+
+        modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+            console.log('email heading: ' + result.heading);
+            console.log('email body: ' + result.body);
         });
     }
 

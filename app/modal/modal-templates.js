@@ -1,4 +1,4 @@
-angular.module('templates-modal', ['modal/templates/basic.html', 'modal/templates/profile.html']);
+angular.module('templates-modal', ['modal/templates/basic.html', 'modal/templates/email.html', 'modal/templates/profile.html']);
 
 angular.module("modal/templates/basic.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("modal/templates/basic.html",
@@ -13,6 +13,24 @@ angular.module("modal/templates/basic.html", []).run(["$templateCache", function
     "  data-ng-click=\"modalOptions.close()\">{{modalOptions.closeButtonText}}</button>\n" +
     "  <button class=\"btn btn-primary\" \n" +
     "  data-ng-click=\"modalOptions.ok();\">{{modalOptions.actionButtonText}}</button>\n" +
+    "</div>");
+}]);
+
+angular.module("modal/templates/email.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("modal/templates/email.html",
+    "<div class=\"modal-header\">\n" +
+    "  <h3>{{modalOptions.headerText}}</h3>\n" +
+    "</div>\n" +
+    "<div class=\"modal-body\">\n" +
+    "    <p>{{ modalOptions.email }}</p>\n" +
+    "    <input type=\"text\" ng-model=\"modalOptions.email.heading\">\n" +
+    "    <textarea ng-model=\"modalOptions.email.body\"></textarea>\n" +
+    "</div>\n" +
+    "<div class=\"modal-footer\">\n" +
+    "  <button type=\"button\" class=\"btn\" \n" +
+    "  data-ng-click=\"modalOptions.close()\">{{modalOptions.closeButtonText}}</button>\n" +
+    "  <button class=\"btn btn-primary\" \n" +
+    "  data-ng-click=\"modalOptions.ok(modalOptions.email);\">{{modalOptions.actionButtonText}}</button>\n" +
     "</div>");
 }]);
 
