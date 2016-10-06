@@ -2,7 +2,7 @@
 
 angular
   .module('testingApp', ['core.modal'])
-  .controller('testingCtrl', function($scope, modalService){
+  .controller('testingCtrl', function($scope, modalService, $http){
 
     $scope.testProfile = function () {
 
@@ -82,22 +82,20 @@ angular
     $scope.testExternal = function () {
 
         var modalDefaults = {
-          templateUrl: '//www.google.com'
+          templateUrl: 'modal/templates/basic.html'
         };
 
-        // var modalOptions = {
-        //     closeButtonText: 'Close',
-        //     actionButtonText: 'Ok',
-        //     headerText: header,
-        //     email: {
-        //       heading: 'Sample Subject',
-        //       body: 'Sample Text'
-        //     }
-        // };
+        var modalOptions = {};
 
-        modalService.showModal(modalDefaults, {}).then(function (result) {
-            console.log('email body: ' + result.body);
-        });
+        $http({method: 'GET', url: '/index.html'}).
+            success(function(data, status) {
+                modalOptions.bodyText = data;
+            }).then(function(){
+                modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+                    console.log('email body: ' + result.body);
+                });
+            });
+
     }
 
   });
