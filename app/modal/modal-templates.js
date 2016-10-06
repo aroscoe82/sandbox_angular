@@ -21,8 +21,6 @@ angular.module("modal/templates/email.html", []).run(["$templateCache", function
     "<div class=\"modal-header\">\n" +
     "  <h3>{{modalOptions.headerText}}</h3>\n" +
     "</div>\n" +
-    "<div class=\"modal-body\">\n" +
-    "    <p>{{ modalOptions.email }}</p>\n" +
     "    <input type=\"text\" ng-model=\"modalOptions.email.heading\">\n" +
     "    <textarea ng-model=\"modalOptions.email.body\"></textarea>\n" +
     "</div>\n" +

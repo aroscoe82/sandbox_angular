@@ -77,6 +77,27 @@ angular
             console.log('email heading: ' + result.heading);
             console.log('email body: ' + result.body);
         });
+    };
+
+    $scope.testExternal = function () {
+
+        var modalDefaults = {
+          templateUrl: '//www.google.com'
+        };
+
+        // var modalOptions = {
+        //     closeButtonText: 'Close',
+        //     actionButtonText: 'Ok',
+        //     headerText: header,
+        //     email: {
+        //       heading: 'Sample Subject',
+        //       body: 'Sample Text'
+        //     }
+        // };
+
+        modalService.showModal(modalDefaults, {}).then(function (result) {
+            console.log('email body: ' + result.body);
+        });
     }
 
   });
