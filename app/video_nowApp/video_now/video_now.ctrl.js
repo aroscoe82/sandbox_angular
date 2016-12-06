@@ -69,8 +69,10 @@ angular
     };
 
   $scope.save = function(idx){
-    console.log('clicked save');
-    console.log('index: ' + idx)
-
+    // save step
+    // modify complete status
+    $scope.$parent.$parent.steps[idx].completed = true;
+    // move to next step
+    $scope.$parent.$parent.activeState = $scope.$parent.$parent.steps[idx+1];
   };
 });
