@@ -23,7 +23,6 @@
 }
 
 </style>
-{{ step.attachmentFile }}
 <form class="edit-post">
   <div class="form-group">
     <div class="controls">
@@ -41,12 +40,16 @@
         </div>
         <input type="checkbox" name="attachment_file-clear" class="fileupload-clear">
       </div>
+      <div ng-if="step.attachmentFile">
+        {{ step.attachmentFile.name }} ({{ step.attachmentFile.size | bytes:0 }})
+        <progressbar class="progress-striped active" value="progressPercentage" type="success">{{ progressPercentage + '%' }}</progressbar>
+      </div>
     </div>
   </div>
 </form>
 <div class="row">
   <div class="col-xs-12">
     <!-- <button class="btn btn-primary" ng-click="save(step)" ng-disabled="!step.attachmentFile && step.required">Next</button> -->
-    <button class="btn btn-primary" ng-click="save($index)">Next</button>
+    <button class="btn btn-primary" ng-click="save($index)" ng-disabled="!step.attachmentFile && step.required">Next</button> <span ng-if="step.attachmentFile"><input type="checkbox"> Email me when the file is processed and uploaded</span>
   </div>
 </div>

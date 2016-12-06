@@ -27,9 +27,9 @@
 </div>
 </div>
 <div class="wizard">
-  <div class="step row" ng-class="{active: activeState == step }" ng-repeat="step in steps">
+  <div class="step row" ng-class="{active: activeState == step}" ng-repeat="step in steps">
     <div class="col-xs-12">
-      <div class="step-header" ng-click="changeMe(step)">
+      <div class="step-header" ng-click="changeMe($index)">
         <div class="step-indicator">
           <span ng-if="step.completed" class="step-completed"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
           <span ng-if="!step.completed">{{ $index +1 }}.</span>

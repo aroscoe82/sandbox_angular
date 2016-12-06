@@ -30,6 +30,15 @@ angular
 
   $urlRouterProvider.otherwise('/wizard');
 })
+.filter('bytes', function() {
+  return function(bytes, precision) {
+    if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
+    if (typeof precision === 'undefined') precision = 1;
+    var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
+    number = Math.floor(Math.log(bytes) / Math.log(1024));
+    return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) +  ' ' + units[number];
+  }
+})
 .controller('wizardViewController', function($http, $scope, $state){
 
   $scope.steps = [
@@ -55,8 +64,11 @@ angular
 
   $scope.activeState = $scope.steps.leftOffAt ? $scope.steps.leftOffAt : $scope.steps[0];
 
-  $scope.changeMe = function(step){
-    $scope.activeState = step;
+  $scope.changeMe = function(idx){
+    // if I've completed the step I can navigate to it
+    if($scope.steps[idx].completed){
+      $scope.activeState = $scope.steps[idx];  
+    }
   };
 
 })
@@ -67,6 +79,9 @@ angular
       plugins: 'link hr code',
       toolbar: 'undo redo | formatselect bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | hr code'
     };
+
+  $scope.video_max = 100;
+  $scope.progressPercentage = 42;
 
   $scope.save = function(idx){
     // save step

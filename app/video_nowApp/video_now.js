@@ -3,5 +3,6 @@
 angular.module('videoApp', [
     'ui.router',
     'videoApp.wizard',
-    'ui.tinymce'
+    'ui.tinymce',
+    'ngFileUpload'
   ]);
