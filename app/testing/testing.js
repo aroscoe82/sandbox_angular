@@ -2,6 +2,32 @@
 
 angular
   .module('testingApp', ['core.modal'])
+  .directive('modalViewUrl', function (modalService, $http) {
+    return {
+        restrict: 'A', // A: attribute
+        scope: { // isolate scope
+            'modalViewUrl': '@' // modal view url to render the modal content
+        },
+        link: function($scope, element, attrs){
+          var modalDefaults = {
+            templateUrl: 'modal/templates/basic.html'
+          };
+
+          var modalOptions = {};
+
+          element.bind('click', function(){
+
+            $http({method: 'GET', url: $scope. modalViewUrl}).
+              success(function(data, status) {
+                modalOptions.bodyText = data;
+              }).then(function(){
+                modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+                });
+              });
+            });
+        }
+    }
+})
   .controller('testingCtrl', function($scope, modalService, $http){
 
     $scope.testProfile = function () {
@@ -81,21 +107,20 @@ angular
 
     $scope.testExternal = function () {
 
-        var modalDefaults = {
-          templateUrl: 'modal/templates/basic.html'
-        };
+      var modalDefaults = {
+        templateUrl: 'modal/templates/basic.html'
+      };
 
-        var modalOptions = {};
+      var modalOptions = {};
 
-        $http({method: 'GET', url: '/index.html'}).
-            success(function(data, status) {
-                modalOptions.bodyText = data;
-            }).then(function(){
-                modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-                    console.log('email body: ' + result.body);
-                });
-            });
-
-    }
+      $http({method: 'GET', url: '/index.html'}).
+        success(function(data, status) {
+          modalOptions.bodyText = data;
+        }).then(function(){
+          modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+            console.log('email body: ' + result.body);
+          });
+        });
+      };
 
   });

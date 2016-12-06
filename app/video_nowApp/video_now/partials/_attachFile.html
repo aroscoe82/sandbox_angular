@@ -1,0 +1,52 @@
+<style>
+.input-append .uneditable-input{
+    width: 206px;
+    display: inline-block;
+    height: 20px;
+    padding: 4px 6px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    vertical-align: middle;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: 0;
+    background-color: #eeeeee;
+    color: #777;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -moz-box-shadow: inset 0 2px 2px rgba(0,0,0,0.2);
+    -webkit-box-shadow: inset 0 2px 2px rgba(0,0,0,0.2);
+    box-shadow: inset 0 2px 2px rgba(0,0,0,0.2);
+}
+
+</style>
+
+<form ng-submit="savePost(post)" class="edit-post">
+  <div class="form-group">
+    <label for="id_attachment_file">Attach File</label>
+    <div class="controls">
+      <div ng-class="step.attachmentFile ? 'fileupload-exists' : 'fileupload-new'" class="fileupload" data-provides="fileupload">
+        <div class="input-append">
+          <div class="uneditable-input col-xs-3">
+            <i class="icon-file fileupload-exists"></i>&nbsp;<a href="{{step.attachmentFile.name}}" target="_blank" class="fileupload-preview">{{step.attachmentFile.name}}</a>
+          </div>
+          <span class="btn btn-file">
+            <span class="fileupload-new">Select File</span>
+            <span class="fileupload-exists">Change File</span>
+            <input type="file" name="attachment_file" class="attachment_file_input" ngf-select ng-model="step.attachmentFile">
+          </span>
+          <button ng-if="step.attachmentFile" class="btn fileupload-exists" data-dismiss="fileupload" ng-click="post.attachmentFile = null">Remove File</button>
+        </div>
+        <input type="checkbox" name="attachment_file-clear" class="fileupload-clear">
+      </div>
+    </div>
+  </div>
+</form>
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-primary" ng-click="save($index -1)" ng-disabled="!step.attachmentFile  && step.required">Next</button>
+  </div>
+</div>

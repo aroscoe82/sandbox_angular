@@ -1,0 +1,58 @@
+<style>
+  #status-buttons a.active { color: #008000; font-weight: bold; }
+  #status-buttons li a > span { display: none; }
+  #status-buttons li a.active > span { display: inline-block; }
+
+  .wizard .step + .step { border-top: 1px solid #eee; }
+  .wizard .step .step-header { padding: .5em 1em .5em 0; cursor: pointer; }
+
+  .wizard .step .step-content { display: none; padding: 0 2em .5em; }
+  .wizard .step.active .step-content { display: block; }
+
+  .wizard .step-indicator { width: 19px; display: inline-block; }
+  .wizard .step-completed { color: #008000; font-size: 1.15em; }
+  .wizard .step-required:after { content: '*'; margin-left: .25em; }
+</style>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Wizard</h1>
+    <p>Current Step: {{ activeState }}</p>
+  <hr>
+  </div>
+</div>
+<div class="row">
+<div class="col-xs-12">
+  <p class="text-right"><i>* required</i></p>
+</div>
+</div>
+<div class="wizard">
+  <div class="step row" ng-class="{active: activeState == step }" ng-repeat="step in steps">
+    <div class="col-xs-12">
+      <div class="step-header" ng-click="changeMe(step)">
+        <div class="step-indicator">
+          <span ng-if="step.completed" class="step-completed"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+          <span ng-if="!step.completed">{{ $index +1 }}.</span>
+        </div>
+        <span ng-class="{ 'step-required': step.required }">{{ step.desc }}</span>
+      </div>
+      <div class="step-content container-fluid">
+        <div ui-view="{{step.name}}"></div>
+      </div>
+    </div>
+  </div>
+  <div class="step row" ng-class="{active: activeState == step }">
+    <div class="col-xs-12">
+      <div class="step-header" ng-click="changeMe(step)">
+        <div class="step-indicator">
+          <span ng-if="step.completed" class="step-completed"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+          <span ng-if="!step.completed">{{ steps.length +1 }}.</span>
+        </div>
+        <span ng-class="{ 'step-required': step.required }">Publish</span>
+      </div>
+      <div class="step-content">
+        <button class="btn btn-primary" ng-click="publish()">Publish</button>
+      </div>
+    </div>
+  </div>
+</div>

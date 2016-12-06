@@ -3,16 +3,14 @@ angular.module('templates-modal', ['modal/templates/basic.html', 'modal/template
 angular.module("modal/templates/basic.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("modal/templates/basic.html",
     "<div class=\"modal-header\">\n" +
-    "  <h3>{{modalOptions.headerText}}</h3>\n" +
+    "  <button type=\"button\" class=\"close\" data-ng-click=\"modalOptions.close()\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n" +
+    "  <h3 class=\"modal-title\">{{modalOptions.headerText}}</h3>\n" +
     "</div>\n" +
     "<div class=\"modal-body\">\n" +
     "  <div ng-bind-html=\"modalOptions.bodyText | trust\"></div>\n" +
     "</div>\n" +
     "<div class=\"modal-footer\">\n" +
-    "  <button type=\"button\" class=\"btn\" \n" +
-    "  data-ng-click=\"modalOptions.close()\">{{modalOptions.closeButtonText}}</button>\n" +
-    "  <button class=\"btn btn-primary\" \n" +
-    "  data-ng-click=\"modalOptions.ok();\">{{modalOptions.actionButtonText}}</button>\n" +
+    "  <button class=\"btn btn-primary\" data-ng-click=\"modalOptions.ok();\">{{modalOptions.actionButtonText}}</button>\n" +
     "</div>");
 }]);
 

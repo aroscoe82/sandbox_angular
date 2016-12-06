@@ -2,6 +2,7 @@
 <html xmlns:ng="http://angularjs.org">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <title>Testing Sandbox</title>
@@ -10,10 +11,16 @@
   <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <!-- <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" /> -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
   
   <!-- <script src="js/modernizer.js"></script> -->
-  <!-- <script src="vendor/angular/angular.js"></script> -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js" type="text/javascript"></script>
+  <script src="vendor/angular/angular.js"></script>
+<!--   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js" type="text/javascript"></script> -->
   <!-- <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.4.js" type="text/javascript"></script> -->
   <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
@@ -22,39 +29,41 @@
 
   <script src="vendor/angular-resource/angular-resource.js"></script>
   <script src="vendor/angular-ui-router/release/angular-ui-router.js"></script>
-
-  <!-- Bootstrap -->
-  <!-- <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" /> -->
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
+  
 
   <!-- <script src="app/membersApp/members.js"></script>
   <script src="app/membersApp/members/module.js"></script>
   <script src="app/membersApp/members/members.ctrl.js"></script>
   <script src="app/membersApp/members/members.svc.js"></script> -->
 
-  <script src="app/modal/modal-templates.js"></script>
-  <script src="app/modal/modal.svc.js"></script>
+  <!-- <script src="app/modal/modal-templates.js"></script>
+  <script src="app/modal/modal.svc.js"></script> -->
   <!-- <script src="app/modal/modal.js"></script> -->
 
-  <script src="app/testing/testing.js"></script>
+  <!-- <script src="app/testing/testing.js"></script> -->
+
+  <script src="app/video_nowApp/video_now.js"></script>
+  <script src="app/video_nowApp/video_now/module.js"></script>
+  <script src="app/video_nowApp/video_now/video_now.ctrl.js"></script>
   
 </head>
-<body>
-<!-- <div class="container" ng-app="membersApp">
-  <div ui-view></div>
-</div> -->
+<body ng-app="videoApp">
+  <div class="container">
+    <div ui-view></div>
+  </div>
 
 <!-- <div class="container" ng-app="core.modal" ng-controller="ModalDemoCtrl">
   <button class="btn btn-default" ng-click="open()">Open me!</button>
   <p>Message: {{msg}}</p>
 </div> -->
 
-<div class="container" ng-app="testingApp" ng-controller="testingCtrl">
+<!-- <div class="container" ng-app="testingApp" ng-controller="testingCtrl">
   <button ng-click="testProfile()" class="btn btn-primary">Testing Profile</button>
   <button ng-click="testBasic()" class="btn btn-primary">Testing Basic</button>
   <button ng-click="testEmail()" class="btn btn-primary">Testing Email</button>
   <button ng-click="testExternal()" class="btn btn-primary">Testing External</button>
   <a href="http://www.google.com" role="button" class="btn primary" data-toggle="modal">Open me</a>
-</div>
+  <a modal-view-url="temp.html" href="#">Click here to open the modal</a>
+</div> -->
 </body>
 </html>
